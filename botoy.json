@@ -1,0 +1,14 @@
+{
+  "url": "127.0.0.1:8888",
+  "qq": 461505108,
+  "superAdmin": 2311366525,
+  "proxies": null,
+  "setu.base64_send": true,
+  "setu.transpose": false,
+  "setu.refresh_token": "jiiV-KUwq1vkQ8X4kijnER7QgX_o1y-Xfz9uIQ_2fDc",
+  "apscheduler_autostart": true,
+  "apscheduler_log_level": 30,
+  "apscheduler_config": {
+    "apscheduler.timezone": "Asia/Shanghai"
+  }
+}

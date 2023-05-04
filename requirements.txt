@@ -1,0 +1,11 @@
+botoy
+pydantic
+tenacity
+tinydb
+tinyrecord
+httpx[socks]
+Pillow
+py-cpuinfo
+ujson
+psutil
+borax==3.5.2
