@@ -9,3 +9,5 @@ py-cpuinfo
 ujson
 psutil
 borax==3.5.2
+fastapi
+uvicorn
