@@ -67,7 +67,7 @@ async def get_moyu():
     img_url = re.findall(r"https:.*?png", content.text)[0].replace("\\", "")
 
     res = requests.get(url=img_url, headers=headers)
-    
+
     img_base64 = ""
 
     with Image.open(BytesIO(res.content)) as pic:
@@ -76,13 +76,11 @@ async def get_moyu():
             img_base64 = base64.b64encode(bf.getvalue()).decode()
 
     action = Action(qq=jconfig.bot)
-    # action.sendGroupPic(773933325, text=s, base64=img_base64)
-
+    await action.sendGroupPic(773933325, text=s, base64=img_base64)
     # action.sendFriendPic(3093892740, text=s, base64=img_base64)
 
-    # await action.sendGroupPic(773933325, text=s, url=img_url)
-
     await action.sendFriendPic(jconfig.superAdmin, text=s, base64=img_base64)
+    await action.close()
 
 
 job1 = async_scheduler.add_job(get_moyu, "cron", hour=9, minute=0)

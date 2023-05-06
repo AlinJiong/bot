@@ -42,6 +42,7 @@ async def send_news():
 
     await action.sendFriendPic(jconfig.superAdmin, text="#今日早报#", url=img)
     await action.sendFriendPic(3093892740, text="#今日早报#", url=img)
+    await action.close()
 
     logger.info("发送早报成功！")
 
