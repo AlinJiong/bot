@@ -83,4 +83,4 @@ async def get_moyu():
     await action.close()
 
 
-job1 = async_scheduler.add_job(get_moyu, "cron", hour=9, minute=0)
+job1 = async_scheduler.add_job(get_moyu, "cron", hour=9, minute=10)
