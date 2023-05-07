@@ -53,7 +53,7 @@ async def get_HotList(choice: str = "weibo"):
             await action.sendFriendText(jconfig.superAdmin, content)
             time.sleep(5)
             await action.sendFriendText(3093892740, content)
-            await action.close()
+            # await action.close()
 
         except Exception as e:
             logger.info(e)

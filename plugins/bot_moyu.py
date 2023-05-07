@@ -80,7 +80,7 @@ async def get_moyu():
     # action.sendFriendPic(3093892740, text=s, base64=img_base64)
 
     await action.sendFriendPic(jconfig.superAdmin, text=s, base64=img_base64)
-    await action.close()
+    # await action.close()
 
 
 job1 = async_scheduler.add_job(get_moyu, "cron", hour=9, minute=10)
