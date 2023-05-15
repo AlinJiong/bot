@@ -54,6 +54,7 @@ async def get_HotList(choice: str = "weibo"):
             time.sleep(5)
             await action.sendFriendText(3093892740, content)
             # await action.close()
+            logger.info("发送微博热搜！")
 
         except Exception as e:
             logger.info(e)

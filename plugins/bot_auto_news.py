@@ -7,16 +7,15 @@ import requests
 
 from botoy import Action
 
-
 __doc__ = "早报（auto)"
 
 
 async def get_news():
-    url = 'http://dwz.2xb.cn/zaob'
+    url = "http://dwz.2xb.cn/zaob"
     content = requests.get(url)
     text_to_dic = json.loads(content.text)
-    img_url = text_to_dic['imageUrl']
-    if text_to_dic['code'] != 200:
+    img_url = text_to_dic["imageUrl"]
+    if text_to_dic["code"] != 200:
         return None
     return img_url
 
@@ -31,20 +30,20 @@ async def send_news():
 
     groups = []
     for group in groups_tmp:
-        groups.append(group['GroupCode'])
+        groups.append(group["GroupCode"])
 
     groups.remove(953219612)
 
     for group in groups:
         await action.sendGroupPic(group, text="#今日早报#", url=img)
         time.sleep(3)
-        logger.info("发送"+str(group)+"早报成功！")
+        logger.info("发送" + str(group) + "早报成功！")
 
     await action.sendFriendPic(jconfig.superAdmin, text="#今日早报#", url=img)
+    logger.info("向好友 2311366525 发送早报!")
+    time.sleep(10)
     await action.sendFriendPic(3093892740, text="#今日早报#", url=img)
-    # await action.close()
-
-    logger.info("发送早报成功！")
+    logger.info("向好友 3093892740  发送早报!")
 
 
-job1 = async_scheduler.add_job(send_news, 'cron', hour=9, minute=0)
+job1 = async_scheduler.add_job(send_news, "cron", hour=9, minute=0)
