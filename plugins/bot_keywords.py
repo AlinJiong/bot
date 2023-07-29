@@ -73,7 +73,7 @@ async def main():
             await S.text(await get_Tuwei())
         elif m.text == "帮助":
             await S.text(
-                """#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜 auto\#n#早报 auto#""")
+                """#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜 auto#\n#早报 auto#\n#色图#\n""")
 
 
 mark_recv(main, author="alinjiong", name="关键字", usage="发送二次元、看看腿、舔狗日记")
