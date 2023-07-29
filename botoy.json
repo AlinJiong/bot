@@ -5,7 +5,7 @@
   "proxies": null,
   "setu.base64_send": true,
   "setu.transpose": false,
-  "setu.refresh_token": "jiiV-KUwq1vkQ8X4kijnER7QgX_o1y-Xfz9uIQ_2fDc",
+  "setu.refresh_token": "",
   "apscheduler_autostart": true,
   "apscheduler_log_level": 30,
   "apscheduler_config": {
