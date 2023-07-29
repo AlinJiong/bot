@@ -48,11 +48,7 @@ async def get_HotList(choice: str = "weibo"):
             action = Action(qq=jconfig.bot)
             await action.sendGroupText(773933325, content)
             time.sleep(5)
-            await action.sendGroupText(331620093, content)
-            time.sleep(5)
             await action.sendFriendText(jconfig.superAdmin, content)
-            time.sleep(5)
-            await action.sendFriendText(3093892740, content)
             # await action.close()
             logger.info("发送微博热搜！")
 
