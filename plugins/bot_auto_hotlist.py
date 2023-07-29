@@ -17,7 +17,7 @@ __doc__ = "微博热搜(auto)"
 
 async def long_to_short(origin_url: str):
     request_url = ("https://v2.alapi.cn/api/url?token=nZJjbVKX1guoU4I4&url=" +
-                   origin_url + "&type=m6zcn")
+                   origin_url + "&type=dwzmk")
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     try:
         response = requests.request("GET",
