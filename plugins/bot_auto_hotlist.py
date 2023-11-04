@@ -18,14 +18,14 @@ __doc__ = "微博热搜(auto)"
 
 
 async def long_to_short_v0(origin_url: str):
-    request_url = ("https://v2.alapi.cn/api/url?token=nZJjbVKX1guoU4I4&url=" +
-                   origin_url + "&type=m6zcn")
+    request_url = (
+        "https://v2.alapi.cn/api/url?token=nZJjbVKX1guoU4I4&url="
+        + origin_url
+        + "&type=m6zcn"
+    )
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     try:
-        response = requests.request("GET",
-                                    request_url,
-                                    headers=headers,
-                                    timeout=10)
+        response = requests.request("GET", request_url, headers=headers, timeout=10)
         if response.status_code != 200:
             return origin_url
         data = json.loads(response.text)
@@ -34,7 +34,7 @@ async def long_to_short_v0(origin_url: str):
         return origin_url
 
 
-async def long_to_short(origin_url: str):
+async def long_to_short_v1(origin_url: str):
     origin_url = urllib.parse.quote(origin_url)  # 有时候长链接转短链接api显示url无效，需要加上这一条
     request_url = ("https://v2.alapi.cn/api/url?token=nZJjbVKX1guoU4I4&url=" +
                    origin_url + "&type=dwzmk")
@@ -52,6 +52,19 @@ async def long_to_short(origin_url: str):
         return origin_url
 
 
+async def long_to_short(origin_url: str):
+    request_url = "https://www.lzfh.com/api/dwz.php?cb=1&sturl=8&longurl=" + origin_url
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+    try:
+        response = requests.request("GET", request_url, headers=headers, timeout=10)
+        if response.status_code != 200:
+            return origin_url
+        data = json.loads(response.text)
+        return data["dwz_url"]
+    except:
+        return origin_url
+
+
 async def get_HotList(choice: str = "weibo"):
     "获取微博热搜"
     try:
@@ -62,8 +75,9 @@ async def get_HotList(choice: str = "weibo"):
         for i in range(0, 10):
             link = await long_to_short(data[i]["url"])
             content += str(i) + "." + data[i]["title"] + "\n" + link + "\n"
-            time.sleep(random.randint(5, 8))
+            time.sleep(random.randint(2, 4))
 
+        content = content[:-1]
         action = Action(qq=jconfig.bot)
         await action.sendGroupText(773933325, content)
         time.sleep(5)
