@@ -1,5 +1,6 @@
 import asyncio
 import datetime
+import random
 import time
 import httpx
 import requests
@@ -8,6 +9,7 @@ import cpuinfo
 import psutil
 from botoy import S, ctx, mark_recv, logger
 import asyncio
+from . import bot_auto_hotlist
 
 __doc__ = "发送 '二次元'"
 
@@ -59,6 +61,18 @@ async def get_Tuwei():
             return text_to_dic["data"]["content"]
         except:
             return None
+        
+        
+async def get_hostlist():
+    data = bot_auto_hotlist.get_hotlist()
+    content = "#实时微博热搜#\n"
+    for i in range(0, 10):
+        link = await bot_auto_hotlist.long_to_short(data[i]["url"])
+        content += str(i) + "." + data[i]["title"] + "\n" + link + "\n"
+        time.sleep(random.randint(2, 4))
+
+    content = content[:-1]
+    return content
 
 
 async def main():
@@ -71,9 +85,12 @@ async def main():
             await S.text(dog_diary())
         elif m.text == "土味情话":
             await S.text(await get_Tuwei())
+        elif m.text == "微博热搜":
+            content = await get_hostlist()
+            await S.text(content)
         elif m.text == "帮助":
             await S.text(
-                """#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜 auto#\n#早报 auto#\n#色图#\n""")
+                """#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜#\n#早报 auto#\n#色图#\n""")
 
 
 mark_recv(main, author="alinjiong", name="关键字", usage="发送二次元、看看腿、舔狗日记")

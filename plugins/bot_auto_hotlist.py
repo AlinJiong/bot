@@ -1,3 +1,10 @@
+# 获取微博热搜
+# time 2023-12-03
+# author：alinjiong
+# 实现思路，先利用官方api https://m.weibo.cn/api/container/getIndex?containerid=106003type%3D25%26t%3D3%26disable_hot%3D1%26filter_type%3Drealtimehot
+# 获取热搜的文本信息，
+# 然后https://s.weibo.com/weibo?q=+文本+&Refer=top 拼接热搜url
+
 from random import random
 import time
 import requests
