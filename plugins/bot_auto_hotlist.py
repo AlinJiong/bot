@@ -80,7 +80,7 @@ def get_hotlist() -> List[dict]:
 
     for i in range(10):
         title = res_dict["data"]["cards"][0]["card_group"][i]["desc"]
-        url = "https://s.weibo.com/weibo?q=%23" + urllib.parse.quote(title) + "%23"
+        url = "https://s.weibo.com/weibo?q=" + urllib.parse.quote(title) + "&Refer=top"
         res.append({"title": title, "url": url})
 
     return res
