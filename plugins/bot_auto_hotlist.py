@@ -5,7 +5,6 @@
 # 获取热搜的文本信息，
 # 然后https://s.weibo.com/weibo?q=+文本+&Refer=top 拼接热搜url
 
-from random import random
 import time
 import requests
 import json
@@ -13,9 +12,7 @@ from botoy import Action
 import random
 import httpx
 from botoy._internal.schedule import async_scheduler
-import time
 from botoy import logger
-import json
 from botoy import jconfig, logger
 import requests
 import urllib
@@ -69,8 +66,8 @@ async def long_to_short(origin_url: str):
     current_path = os.path.abspath(__file__)
     # 获取当前文件的父目录
     father_path = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
-    
-    with open(father_path+"/hotlist.json", "r") as f:
+
+    with open(father_path + "\hotlist.json", "r") as f:
         data = json.load(f)
         if data.get(request_url) != None:
             return data[request_url]
@@ -118,11 +115,11 @@ async def send_hotlist():
             long2short_dict[data[i]["url"]] = link
             content += str(i) + "." + data[i]["title"] + "\n" + link + "\n"
             time.sleep(random.randint(2, 4))
-            
+
         current_path = os.path.abspath(__file__)
         # 获取当前文件的父目录
         father_path = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
-        with open(father_path+"/hotlist.json", "w") as f:
+        with open(father_path + "\hotlist.json", "w") as f:
             json.dump(long2short_dict, f)
 
         content = content[:-1]
