@@ -20,6 +20,8 @@ from botoy import jconfig, logger
 import requests
 import urllib
 from typing import List
+import os
+
 
 __doc__ = "微博热搜(auto)"
 
@@ -63,7 +65,12 @@ async def long_to_short(origin_url: str):
     request_url = "https://www.lzfh.com/api/dwz.php?cb=1&sturl=8&longurl=" + origin_url
 
     # 如何json中有长链接的数据，就不用转
-    with open("./hotlist.json", "r") as f:
+    # 获取当前文件路径
+    current_path = os.path.abspath(__file__)
+    # 获取当前文件的父目录
+    father_path = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
+    
+    with open(father_path+"/hotlist.json", "r") as f:
         data = json.load(f)
         if data.get(request_url) != None:
             return data[request_url]
@@ -111,7 +118,11 @@ async def send_hotlist():
             long2short_dict[data[i]["url"]] = link
             content += str(i) + "." + data[i]["title"] + "\n" + link + "\n"
             time.sleep(random.randint(2, 4))
-        with open("hotlist.json", "w") as f:
+            
+        current_path = os.path.abspath(__file__)
+        # 获取当前文件的父目录
+        father_path = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
+        with open(father_path+"/hotlist.json", "w") as f:
             json.dump(long2short_dict, f)
 
         content = content[:-1]
