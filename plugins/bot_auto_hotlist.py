@@ -61,6 +61,13 @@ async def long_to_short_v1(origin_url: str):
 
 async def long_to_short(origin_url: str):
     request_url = "https://www.lzfh.com/api/dwz.php?cb=1&sturl=8&longurl=" + origin_url
+
+    # 如何json中有长链接的数据，就不用转
+    with open("./hotlist.json", "r") as f:
+        data = json.load(f)
+        if data.get(request_url) != None:
+            return data[request_url]
+
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
     try:
         response = requests.request("GET", request_url, headers=headers, timeout=10)
@@ -98,10 +105,14 @@ async def send_hotlist():
     try:
         data = get_hotlist()
         content = "#实时微博热搜#\n"
+        long2short_dict = {}
         for i in range(0, 10):
             link = await long_to_short(data[i]["url"])
+            long2short_dict[data[i]["url"]] = link
             content += str(i) + "." + data[i]["title"] + "\n" + link + "\n"
             time.sleep(random.randint(2, 4))
+        with open("hotlist.json", "w") as f:
+            json.dump(long2short_dict, f)
 
         content = content[:-1]
         action = Action(qq=jconfig.bot)
