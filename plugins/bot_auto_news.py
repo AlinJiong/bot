@@ -37,7 +37,11 @@ async def send_news():
 
     response = requests.get(img_url)
     # 得到图片的base64编码
-    img_base64 = base64.b64encode(BytesIO(response.content).read())
+    img = base64.b64encode(response.content)
+    
+    img_base64 = img.decode('utf-8')
+    
+    
 
     action = Action(qq=jconfig.qq)
     groups_tmp = await action.getGroupList()
