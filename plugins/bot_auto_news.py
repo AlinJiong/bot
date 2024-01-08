@@ -24,7 +24,7 @@ async def get_news():
     url = "https://api.jun.la/60s.php?format=imgapi"
     content = requests.get(url)
     text_to_dic = json.loads(content.text)
-    if text_to_dic["code"] != 200:
+    if int(text_to_dic["code"]) != 200:
         return None
     return  text_to_dic["imageBaidu"]
 
