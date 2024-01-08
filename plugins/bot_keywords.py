@@ -89,7 +89,8 @@ async def main():
             url = await bot_auto_news.get_news()
             response = requests.get(url)
             # 得到图片的base64编码
-            img_base64 = base64.b64encode(BytesIO(response.content).read())
+            img = base64.b64encode(response.content)
+            img_base64 = img.decode("utf-8")
             await S.image(data=img_base64, text="#今日早报#")
         elif m.text == "帮助":
             await S.text("""#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜#\n#早报 auto#\n#色图#\n""")
