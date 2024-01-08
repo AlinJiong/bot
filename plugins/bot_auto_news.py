@@ -10,14 +10,23 @@ from botoy import Action
 __doc__ = "早报（auto)"
 
 
+# async def get_news():
+#     url = "http://dwz.2xb.cn/zaob"
+#     content = requests.get(url)
+#     text_to_dic = json.loads(content.text)
+#     img_url = text_to_dic["imageUrl"]
+#     if text_to_dic["code"] != 200:
+#         return None
+#     return img_url
+
+
 async def get_news():
-    url = "http://dwz.2xb.cn/zaob"
+    url = "https://api.jun.la/60s.php?format=imgapi"
     content = requests.get(url)
     text_to_dic = json.loads(content.text)
-    img_url = text_to_dic["imageUrl"]
     if text_to_dic["code"] != 200:
         return None
-    return img_url
+    return  text_to_dic["imageBaidu"]
 
 
 async def send_news():

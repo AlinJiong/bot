@@ -10,6 +10,7 @@ import psutil
 from botoy import S, ctx, mark_recv, logger
 import asyncio
 from . import bot_auto_hotlist
+from . import bot_auto_news
 
 __doc__ = "发送 '二次元'"
 
@@ -79,8 +80,6 @@ async def main():
     if m := (ctx.group_msg or ctx.friend_msg):
         if m.text == "二次元":
             await S.image(data="http://121.40.95.21/api/tu.php")
-        # elif m.text == "看看腿":
-        #     await S.image(data=getPicUrl())
         elif m.text == "舔狗日记":
             await S.text(dog_diary())
         elif m.text == "土味情话":
@@ -88,6 +87,9 @@ async def main():
         elif m.text == "微博热搜":
             content = await get_hostlist()
             await S.text(content)
+        elif m.text == "早报":
+            url = await bot_auto_news.get_news()
+            await S.image(data=url, text="#今日早报#")
         elif m.text == "帮助":
             await S.text(
                 """#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜#\n#早报 auto#\n#色图#\n""")
