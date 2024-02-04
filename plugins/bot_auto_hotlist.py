@@ -23,7 +23,7 @@ import os
 __doc__ = "微博热搜(auto)"
 
 
-async def long_to_short_v0(origin_url: str):
+async def long_to_short(origin_url: str):
     request_url = (
         "https://v2.alapi.cn/api/url?token=nZJjbVKX1guoU4I4&url="
         + origin_url
@@ -58,7 +58,7 @@ async def long_to_short_v1(origin_url: str):
         return origin_url
 
 
-async def long_to_short(origin_url: str):
+async def long_to_short_v2(origin_url: str):
     request_url = "https://www.lzfh.com/api/dwz.php?cb=1&sturl=8&longurl=" + origin_url
 
     # 如何json中有长链接的数据，就不用转
