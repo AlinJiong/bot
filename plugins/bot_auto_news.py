@@ -22,12 +22,12 @@ __doc__ = "早报（auto)"
 
 
 async def get_news():
-    url = "https://api.jun.la/60s.php?format=imgapi"
+    url = "https://api.03c3.cn/api/zb?type=jsonImg"
     content = requests.get(url)
     text_to_dic = json.loads(content.text)
     if int(text_to_dic["code"]) != 200:
         return None
-    return text_to_dic["imageBaidu"]
+    return text_to_dic["data"]["imageurl"]
 
 
 async def send_news():
