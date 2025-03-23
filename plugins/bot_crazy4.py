@@ -7,6 +7,7 @@ import requests
 import base64
 from io import BytesIO
 from botoy import Action
+import os
 
 __doc__ = "疯4（auto)"
 
@@ -19,6 +20,13 @@ __doc__ = "疯4（auto)"
 #     if text_to_dic["code"] != 200:
 #         return None
 #     return img_url
+
+# 获取当前脚本的绝对路径
+current_script_path = os.path.abspath(__file__)
+
+# 获取当前脚本所在目录
+current_directory = os.path.dirname(current_script_path)
+
 
 
 async def get_text():
@@ -45,7 +53,7 @@ async def send_news():
     if  text == None:
         return
     
-    img_base64 = file_to_base64(r"crazy.jpg")
+    img_base64 = file_to_base64(current_directory + r"/crazy.jpg")
 
     action = Action(qq=jconfig.qq)
     await action.sendFriendPic(jconfig.superAdmin, text=text, base64=img_base64)
