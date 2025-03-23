@@ -96,7 +96,7 @@ async def main():
         elif m.text == "帮助":
             await S.text("""#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜#\n#早报 auto#\n#色图#\n""")
         elif m.text == "摸鱼":
-            img_base64 = await bot_moyu.get_moyu()
+            img_base64 = await bot_moyu.get_moyu_img()
             await S.image(data=img_base64)
 
 

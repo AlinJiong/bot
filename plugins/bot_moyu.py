@@ -15,6 +15,27 @@ from botoy._internal.schedule import async_scheduler
 __doc__ = "摸鱼提醒（auto)"
 
 
+async def get_moyu_img():
+    url = "https://api.52vmy.cn/api/wl/moyu"
+    
+    headers = {
+    "User-Agent":
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"
+}
+    
+    res  = requests.get(url, headers=headers, timeout=10)
+ 
+    if res.status_code != 200:
+        return None
+        # 保存图片到临时文件
+        
+    image_data = res.content
+    
+    img_base64 =base64.b64encode(image_data).decode('utf-8')
+    
+    return img_base64
+
+
 async def get_moyu():
     new_date = datetime.date.today().strftime("%Y年%m月%d日")
     today = LunarDate.today()
@@ -75,29 +96,13 @@ async def get_moyu():
     #         pic.save(bf, format="PNG")
     #         img_base64 = base64.b64encode(bf.getvalue()).decode()
 
-    url = "https://api.52vmy.cn/api/wl/moyu"
+    img_base64 = await get_moyu_img()
     
-    headers = {
-    "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"
-}
-    
-    res  = requests.get(url, headers=headers, timeout=10)
- 
-    if res.status_code != 200:
-        return None
-        # 保存图片到临时文件
-        
-    image_data = res.content
-    
-    img_base64 =base64.b64encode(image_data).decode('utf-8')
-
     action = Action(qq=jconfig.bot)
     await action.sendGroupPic(773933325, text=s, base64=img_base64)
     # action.sendFriendPic(3093892740, text=s, base64=img_base64)
 
     await action.sendFriendPic(jconfig.superAdmin, text=s, base64=img_base64)
     # await action.close()
-    return img_base64
 
 job1 = async_scheduler.add_job(get_moyu, "cron", hour=9, minute=10)
