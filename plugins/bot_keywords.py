@@ -12,6 +12,7 @@ import asyncio
 from . import bot_auto_hotlist
 from . import bot_auto_news
 from . import bot_moyu
+from . import bot_crazy4
 import base64
 from io import BytesIO
 
@@ -94,10 +95,15 @@ async def main():
             img_base64 = img.decode("utf-8")
             await S.image(data=img_base64, text="#今日早报#")
         elif m.text == "帮助":
-            await S.text("""#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜#\n#早报 auto#\n#色图#\n""")
+            await S.text("""#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜#\n#早报 auto#\n#色图#\n#摸鱼#\n#疯4#\n""")
         elif m.text == "摸鱼":
             img_base64 = await bot_moyu.get_moyu_img()
             await S.image(data=img_base64)
+            
+        elif m.text == "疯4":
+            text = await bot_crazy4.get_text()
+            await S.text(text=text)
+            
 
 
 mark_recv(main, author="alinjiong", name="关键字", usage="发送二次元、看看腿、舔狗日记")
