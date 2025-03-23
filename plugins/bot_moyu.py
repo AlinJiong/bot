@@ -15,7 +15,7 @@ from botoy._internal.schedule import async_scheduler
 __doc__ = "摸鱼提醒（auto)"
 
 
-async def get_moyu()->str|None:
+async def get_moyu():
     new_date = datetime.date.today().strftime("%Y年%m月%d日")
     today = LunarDate.today()
     lunardate = today.strftime("%L%M月%D")
