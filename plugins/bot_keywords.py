@@ -11,6 +11,7 @@ from botoy import S, ctx, mark_recv, logger
 import asyncio
 from . import bot_auto_hotlist
 from . import bot_auto_news
+from . import bot_moyu
 import base64
 from io import BytesIO
 
@@ -94,6 +95,9 @@ async def main():
             await S.image(data=img_base64, text="#今日早报#")
         elif m.text == "帮助":
             await S.text("""#二次元#\n#舔狗日记#\n#摸鱼提醒 auto#\n#微博热搜#\n#早报 auto#\n#色图#\n""")
+        elif m.text == "摸鱼":
+            img_base64 = await bot_moyu.get_moyu()
+            await S.image(data=img_base64)
 
 
 mark_recv(main, author="alinjiong", name="关键字", usage="发送二次元、看看腿、舔狗日记")
