@@ -56,19 +56,19 @@ async def send_news():
     img_base64 = file_to_base64(current_directory + r"/crazy.jpg")
 
     action = Action(qq=jconfig.qq)
-    await action.sendFriendPic(jconfig.superAdmin, text=text, base64=img_base64)
-    # groups_tmp = await action.getGroupList()
+    # await action.sendFriendPic(jconfig.superAdmin, text=text, base64=img_base64)
+    groups_tmp = await action.getGroupList()
 
-    # groups = []
-    # for group in groups_tmp:
-    #     groups.append(group["GroupCode"])
+    groups = []
+    for group in groups_tmp:
+        groups.append(group["GroupCode"])
 
-    # groups.remove(953219612,544830164)
+    groups.remove(953219612,544830164)
 
-    # for group in groups:
-    #     await action.sendGroupPic(group, text=text, base64=img_base64)
-    #     time.sleep(3)
-    #     logger.info("发送" + str(group) + "疯4成功！")
+    for group in groups:
+        await action.sendGroupPic(group, text=text, base64=img_base64)
+        time.sleep(3)
+        logger.info("发送" + str(group) + "疯4成功！")
 
   
 
